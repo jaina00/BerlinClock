@@ -3,7 +3,7 @@
   */
 object BerlinClock {
 
-  def parseToBerlinTime(hour: Int, minute: Int, second: Int) = {
+  def parseToBerlinTime(hour: Int, minute: Int, second: Int): Either[String, List[String]] = {
 
     (hour, minute, second) match {
       case _ if (0 to 23 contains hour) && (0 to 59 contains minute) && (0 to 59 contains second) =>
@@ -28,17 +28,17 @@ object BerlinClock {
     "R" * (hour / 5)
   }
 
-  def secondRow(hour: Int) = {
+  def secondRow(hour: Int): String = {
     "R" * (hour % 5)
   }
 
-  def thirdRow(minute: Int) = {
+  def thirdRow(minute: Int): String = {
     val onQuaterLamps = minute / 15
     val onRemainingLamps = (minute % 15) / 5
     ("YYR" * onQuaterLamps) ++ ("Y" * onRemainingLamps)
   }
 
-  def fourthRow(minute: Int) = {
+  def fourthRow(minute: Int): String = {
     "Y" * (minute % 5)
   }
 
